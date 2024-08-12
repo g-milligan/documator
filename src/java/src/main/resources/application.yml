@@ -2,7 +2,7 @@ spring:
   application:
     name: backend
   datasource:
-    url: '${DB_POSTGRESQL_URL}'
+    url: 'jdbc:postgresql://localhost:5432/example_tasks_db'
     username: '${DB_POSTGRESQL_USER}'
     password: '${DB_POSTGRESQL_PWD}'
   jpa:
@@ -11,6 +11,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+      ddl-auto=create: true
     properties:
       hibernate:
         globally_quoted_identifiers: true
