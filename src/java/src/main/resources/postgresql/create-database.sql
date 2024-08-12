@@ -26,7 +26,7 @@ CREATE TYPE UserGroupEnum AS ENUM (
 CREATE TABLE IF NOT EXISTS usr (
     usr_id              serial primary key,
     usr_name            varchar(510),
-    usr_email           varchar(510) not null,
+    usr_email           varchar(510) unique not null,
     usr_secret          varchar(510) not null,
     usr_active          boolean not null default true,
     usr_group           UserGroupEnum not null default 'VIEWER',

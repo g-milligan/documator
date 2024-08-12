@@ -15,5 +15,5 @@ INSERT INTO usr(
 )
 VALUES 
 ( 'My Admin', 'milligangregg@gmail.com', '1234', 'ADMIN' ),
-( 'My Editor', 'milligangregg@gmail.com', '123', 'EDITOR' ),
+( 'My Editor', 'mail.gtm2@gmail.com', '123', 'EDITOR' ),
 ( 'My Viewer', 'tyleralias@hotmail.com', '12', 'VIEWER' );

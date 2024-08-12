@@ -10,4 +10,5 @@ import gii.example.backend.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findAllByOrderByUserCreatedAtAscUserIdAsc();
     Optional<UserEntity> findByUserId(Long userId);
+    Optional<UserEntity> findByUserEmail(String email);
 }
