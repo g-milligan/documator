@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import gii.example.backend.constant.UserResponse;
 import gii.example.backend.entity.UserEntity;
 import gii.example.backend.repo.UserRepository;
+import gii.example.backend.service.UserSecretScrubService;
 
 @RestController
 @RequestMapping("/users")
@@ -27,7 +28,8 @@ public class UserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> getUsers() {
         List<UserEntity> users = userRepo.findAllByOrderByUserCreatedAtAscUserIdAsc();
-        return new ResponseEntity<>(new UserResponse(users), HttpStatus.OK);
+        List<UserEntity> scrubbedUsers = UserSecretScrubService.ScrubSecrets(users, true);
+        return new ResponseEntity<>(new UserResponse(scrubbedUsers), HttpStatus.OK);
     }
 
     // get one user by id
@@ -35,7 +37,8 @@ public class UserController {
     public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
         Optional<UserEntity> user = userRepo.findByUserId(id);
         if (user.isPresent()) {
-            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+            UserEntity scrubbedUser = UserSecretScrubService.ScrubSecrets(user.get(), true);
+            return new ResponseEntity<>(scrubbedUser, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
