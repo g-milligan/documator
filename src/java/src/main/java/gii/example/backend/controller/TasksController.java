@@ -1,6 +1,7 @@
 package gii.example.backend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +26,18 @@ public class TasksController {
     // get all tasks
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TasksResponse> getTasks() {
-        List<TaskEntity> tasks = taskRepo.findAll();
+        List<TaskEntity> tasks = taskRepo.findAllByOrderByTaskCreatedAtAscTaskIdAsc();
         return new ResponseEntity<>(new TasksResponse(tasks), HttpStatus.OK);
     }
 
     // get one task by id
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TaskEntity> getTaskById(@PathVariable int id) {
-        return new ResponseEntity<>(new TaskEntity(), HttpStatus.OK);
+    public ResponseEntity<TaskEntity> getTaskById(@PathVariable Long id) {
+        Optional<TaskEntity> task = taskRepo.findByTaskId(id);
+        if (task.isPresent()) {
+            return new ResponseEntity<>(task.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
 }
