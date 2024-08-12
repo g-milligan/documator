@@ -11,6 +11,7 @@ import gii.example.backend.entity.UserEntity;
 public class UserSecretScrubService {
 
     private final static String obfuscateChars = "****";
+    private final static String atSymbol = "@";
 
     public static UserEntity ScrubSecrets(UserEntity user, boolean doObfuscateEmail) {
         user.setUserPwd(obfuscateChars);
@@ -18,10 +19,10 @@ public class UserSecretScrubService {
             return user;
         }
         String email = user.getUserEmail();
-        if (email.contains("@")) {
+        if (email.contains(atSymbol)) {
             email = email.substring(0, 1) 
                 + obfuscateChars
-                + email.substring(email.indexOf("@"));
+                + email.substring(email.indexOf(atSymbol));
         } else {
             email = obfuscateChars;
         }
