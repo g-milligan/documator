@@ -23,13 +23,13 @@ CREATE TYPE UserGroupEnum AS ENUM (
     'EDITOR', 
     'ADMIN');
 
-CREATE TABLE IF NOT EXISTS user (
-    user_id              serial primary key,
-    user_name            varchar(510),
-    user_email           varchar(510) not null,
-    user_secret          varchar(510) not null,
-    user_active          boolean not null default true,
-    user_group           UserGroupEnum not null default 'VIEWER',
-    user_created         timestamp not null default now(),
-    user_modified        timestamp not null default now()
+CREATE TABLE IF NOT EXISTS usr (
+    usr_id              serial primary key,
+    usr_name            varchar(510),
+    usr_email           varchar(510) not null,
+    usr_secret          varchar(510) not null,
+    usr_active          boolean not null default true,
+    usr_group           UserGroupEnum not null default 'VIEWER',
+    usr_created         timestamp not null default now(),
+    usr_modified        timestamp not null default now()
 );

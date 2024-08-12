@@ -1,3 +1,5 @@
+\c example_tasks_db;
+
 INSERT INTO task(
     task_summary
 )
@@ -8,8 +10,8 @@ VALUES
 ( 'Practice Programming' ),
 ( 'All Fly' );
 
-INSERT INTO user(
-    user_name, user_email, user_secret, user_group
+INSERT INTO usr(
+    usr_name, usr_email, usr_secret, usr_group
 )
 VALUES 
 ( 'My Admin', 'milligangregg@gmail.com', '1234', 'ADMIN' ),
